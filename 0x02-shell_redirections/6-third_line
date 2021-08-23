@@ -1,2 +1,2 @@
 #!/bin/bash
-tail -n 1 $(head -n 3 iacta)
+tail -n 1 <txt.txt $(head -n 3 iacta > txt.txt)
