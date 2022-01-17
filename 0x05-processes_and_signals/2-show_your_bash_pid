@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# using the comand ps -auxf get lines for processes with bash in it
+# shellcheck disable=SC2009
+
+ps -auxf | grep bash
