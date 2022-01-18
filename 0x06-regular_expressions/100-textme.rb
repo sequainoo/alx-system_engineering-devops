@@ -1,2 +1,4 @@
 #!/usr/bin/env ruby
-puts ARGV[0].scan(/\[(from:|to:|flag:)(.*?)\]/).join(",")
+# parse logfile and output [sender],[receiver],[flags]
+
+puts ARGV[0].scan(/\[(?:from:|to:|flags:)(.*?)\]/).join(",")
