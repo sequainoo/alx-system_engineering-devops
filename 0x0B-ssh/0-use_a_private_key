@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# logs into my server using the id ~/.ssh/school
+
+ssh -i ~/.ssh/school ubuntu@3.94.99.147
