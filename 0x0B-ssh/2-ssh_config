@@ -1,0 +1,6 @@
+# Configures the ssh client to login to the host with the specified identity file
+# And prevents the client to use password authentication
+
+Host 3.94.99.147
+    PasswordAuthentication no
+    IdentityFile ~/.ssh/school
