@@ -19,5 +19,10 @@ sudo apt-get update
 sudo apt-get install -y haproxy=2.4.\*
 
 # add configurations
-sudo sed -i "$ a\\\nfrontend myfrontend\n\tbind 3.236.58.217:80\n\tdefault_backend myservers\n" "$HAPROXY_CFG_FILE"
-sudo sed -i "$ a\\\nbackend myservers\n\tbalance roundrobin\n\tserver 2207-web-01 35.231.101.148:80\n\tserver 2207-web-02 3.236.59.25:80\n" "$HAPROXY_CFG_FILE"
+sudo sed -i "$ a\\\nfrontend myfrontend\n\tbind 0.0.0.0:80\n\tdefault_backend myservers\n" "$HAPROXY_CFG_FILE"
+sudo sed -i "$ a\\\nbackend myservers\n\tbalance roundrobin\n\tserver 2207-web-01 35.231.101.148:80 check\n\tserver 2207-web-02 3.236.59.25:80 check\n" "$HAPROXY_CFG_FILE"
+
+# Make sure HAproxy can be managed via an init script
+sudo sed -i "$ ENABLED=1" /etc/default/haproxy
+
+sudo service haproxy restart
