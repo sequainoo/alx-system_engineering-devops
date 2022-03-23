@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# install haproxy-2.4/* if not installed
+
+# configurations
+# PORT=80
+# IP="3.236.58.217"
+# SERVER1="2207-web-01 35.231.101.148:80"
+# SERVER2="2207-web-02 3.236.59.25:80"
+# FRONTEND_CFG="\\\nfrontend myfrontend\n\tbind $IP:$PORT\n\tdefault_backend myservers\n"
+# BACKEND_CFG="\\\nbackend myservers\n\tbalance roundrobin\n\tserver $SERVER1\n\tserver $SERVER2\n"
+HAPROXY_CFG_FILE="/etc/haproxy/haproxy.cfg"
+
+# add haproxy-2.4 ppa to apt sources/repository lists
+sudo apt-get install -y --no-install-recommends software-properties-common
+sudo add-apt-repository ppa:vbernat/haproxy-2.4
+sudo apt-get update
+
+# install haproxy-2.4
+sudo apt-get install -y haproxy=2.4.\*
+
+# add configurations
+sudo sed -i "$ a\\\nfrontend myfrontend\n\tbind 3.236.58.217:80\n\tdefault_backend myservers\n" "$HAPROXY_CFG_FILE"
+sudo sed -i "$ a\\\nbackend myservers\n\tbalance roundrobin\n\tserver 2207-web-01 35.231.101.148:80\n\tserver 2207-web-02 3.236.59.25:80\n" "$HAPROXY_CFG_FILE"
