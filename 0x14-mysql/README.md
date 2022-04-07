@@ -2,4 +2,5 @@
 ___
 
 > Configuring Mysql to have a master slave replication setup
-> It helps with performance, availabilty, etc..
+> availability and balancing of load become somme obvoius benefit of replcation.
+
