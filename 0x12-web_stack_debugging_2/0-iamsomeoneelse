@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# run 'whoami' under another user passed as an argument
+runuser -u $1 whoami
+
