@@ -1,39 +1,38 @@
 #!/usr/bin/python3
-"""Extends on prevoius task api reqest and export to csv
+"""
+Request from API; Return TODO list progress given employee ID
+Export this data to CSV
 """
 import csv
-from requests import get
-import sys
+import requests
+from sys import argv
 
-if __name__ == '__main__':
-    endpoint = 'https://jsonplaceholder.typicode.com/todos'
-    response = get(endpoint)
-    data = response.json()
-    id_ = int(sys.argv[1])
 
-    # get user name
-    name = get('https://jsonplaceholder.typicode.com/users/{}'.format(id_))
-    name = name.json().get('name')
+def to_csv():
+    """return API data"""
+    users = requests.get("http://jsonplaceholder.typicode.com/users")
+    for u in users.json():
+        if u.get('id') == int(argv[1]):
+            USERNAME = (u.get('username'))
+            break
+    TASK_STATUS_TITLE = []
+    todos = requests.get("http://jsonplaceholder.typicode.com/todos")
+    for t in todos.json():
+        if t.get('userId') == int(argv[1]):
+            TASK_STATUS_TITLE.append((t.get('completed'), t.get('title')))
 
-    # filter todos for employee id
-    todos = [todo for todo in data if todo.get('userId') == id_]
-    total = len(todos)
-    done = 0
-    titles = ''
-    file_name = '{}.csv'.format(id_)
-
-    with open(file_name, 'w', encoding='utf-8') as f:
-        # create a csv dictionationary writer
-        fieldnames = ['USER_ID', 'USERNAME',
-                      'TASK_COMPLETED_STATUS', 'TASK_TITLE']
-        writer = csv.DictWriter(f, fieldnames=fieldnames,
+    """export to csv"""
+    filename = "{}.csv".format(argv[1])
+    with open(filename, "w") as csvfile:
+        fieldnames = ["USER_ID", "USERNAME",
+                      "TASK_COMPLETED_STATUS", "TASK_TITLE"]
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames,
                                 quoting=csv.QUOTE_ALL)
-        for todo in todos:
-            dict_ = {'USER_ID': id_, 'USERNAME': name,
-                     'TASK_COMPLETED_STATUS': todo.get('completed'),
-                     'TASK_TITLE': todo.get('title')}
-            writer.writerow(dict_)
+        for task in TASK_STATUS_TITLE:
+            writer.writerow({"USER_ID": argv[1], "USERNAME": USERNAME,
+                             "TASK_COMPLETED_STATUS": task[0],
+                             "TASK_TITLE": task[1]})
 
-            if todo.get('completed'):
-                done += 1
-                titles += '\t ' + todo.get('title') + '\n'
+
+if __name__ == "__main__":
+    to_csv()
