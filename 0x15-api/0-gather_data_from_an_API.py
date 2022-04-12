@@ -18,13 +18,13 @@ if __name__ == '__main__':
     # filter todos for employee id
     todos = [todo for todo in data if todo.get('userId') == id_]
     total = len(todos)
-    completed = 0
+    done = 0
     titles = ''
 
     for todo in todos:
         if todo.get('completed'):
-            completed += 1
+            done += 1
             titles += '\t ' + todo.get('title') + '\n'
 
-    print('Employee {} is done with tasks({}/{}):'.format(name, completed, total))
+    print('Employee {} is done with tasks({}/{}):'.format(name, done, total))
     print(titles, end='')
