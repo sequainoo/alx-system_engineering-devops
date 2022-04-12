@@ -32,5 +32,5 @@ if __name__ == '__main__':
                 done += 1
                 titles += '\t ' + todo.get('title') + '\n'
 
-    print('Employee {} is done with tasks({}/{}):'.format(name, done, total))
-    print(titles, end='')
+    #print('Employee {} is done with tasks({}/{}):'.format(name, done, total))
+    #print(titles, end='')
