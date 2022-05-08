@@ -1,0 +1,31 @@
+== Info:   Trying 35.231.101.148:80...
+== Info: TCP_NODELAY set
+== Info: Connected to web-01.onewazato.tech (35.231.101.148) port 80 (#0)
+=> Send header, 120 bytes (0x78)
+0000: GET /airbnb-dynamic/number_odd_or_even/4 HTTP/1.1
+0033: Host: web-01.onewazato.tech
+0050: User-Agent: curl/7.68.0
+0069: Accept: */*
+0076: 
+== Info: Mark bundle as not supporting multiuse
+<= Recv header, 17 bytes (0x11)
+0000: HTTP/1.1 200 OK
+<= Recv header, 31 bytes (0x1f)
+0000: Server: nginx/1.18.0 (Ubuntu)
+<= Recv header, 37 bytes (0x25)
+0000: Date: Sun, 08 May 2022 17:58:20 GMT
+<= Recv header, 40 bytes (0x28)
+0000: Content-Type: text/html; charset=utf-8
+<= Recv header, 21 bytes (0x15)
+0000: Content-Length: 133
+<= Recv header, 24 bytes (0x18)
+0000: Connection: keep-alive
+<= Recv header, 26 bytes (0x1a)
+0000: X-Served-By: 2207-web-01
+<= Recv header, 2 bytes (0x2)
+0000: 
+<= Recv data, 133 bytes (0x85)
+0000: <!DOCTYPE html>.<HTML lang="en">.  <HEAD>.    <TITLE>HBNB</TITLE
+0040: >.  </HEAD>.  <BODY>.    <H1>Number: 4 is even</H1>.  </BODY>.</
+0080: HTML>
+== Info: Connection #0 to host web-01.onewazato.tech left intact
