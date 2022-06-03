@@ -8,5 +8,4 @@
 #sudo service nginx restart
 
 sudo sed -i "s/sites-enabled/sites-available/" /etc/nginx/nginx.conf
-touch /var/www/html/index.html && echo 'hello' > /var/www/html/index.html
 sudo service nginx restart
